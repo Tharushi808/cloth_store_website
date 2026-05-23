@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Try-On — Luxe Threads</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="page-loader"><div class="spinner"></div></div>
+<div class="toast-container"></div>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">LUXE <span>THREADS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li>
+      <li><a href="shop.html?category=casual">Casual</a></li><li><a href="shop.html?category=office">Office Wear</a></li>
+      <li><a href="virtual-tryon.html" class="active">Virtual Try-On</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="account.html" class="nav-icon-btn"><i class="fas fa-user"></i></a>
+      <a href="account.html#wishlist" class="nav-icon-btn"><i class="far fa-heart"></i><span class="badge wishlist-count" style="display:none">0</span></a>
+      <a href="cart.html" class="nav-icon-btn"><i class="fas fa-shopping-bag"></i><span class="badge cart-count" style="display:none">0</span></a>
+    </div>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="nav-mobile" id="mobile-nav">
+  <ul class="nav-mobile-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="cart.html">Cart</a></li></ul>
+</div>
+
+<!-- HERO BANNER -->
+<div style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:40px 0;text-align:center;color:#fff">
+  <h1 style="font-size:32px;font-weight:800;margin-bottom:8px"><i class="fas fa-camera" style="color:#a8edea"></i> Virtual Try-On Studio</h1>
+  <p style="color:rgba(255,255,255,0.8);font-size:15px">Upload your photo, select any clothing item, and see how it looks on you!</p>
+</div>
+
+<div class="container tryon-layout">
+
+  <!-- SIDEBAR: Controls -->
+  <div class="tryon-sidebar">
+
+    <!-- STEP 1: Upload Photo -->
+    <h3><span style="background:var(--accent);color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;margin-right:6px">1</span> Upload Your Photo</h3>
+    <div class="upload-area" id="upload-area">
+      <i class="fas fa-user-circle"></i>
+      <p><strong>Click or drag & drop</strong><br>a full-body photo here</p>
+      <p style="font-size:11px;margin-top:8px;color:#bbb">JPG, PNG, WebP up to 10MB<br>Best with full-body, front-facing photos</p>
+    </div>
+    <input type="file" id="photo-upload" accept="image/*" style="display:none">
+
+    <button class="btn btn-outline btn-full" id="camera-btn" style="margin-bottom:16px">
+      <i class="fas fa-video"></i> Use Camera Instead
+    </button>
+
+    <!-- Tips -->
+    <div style="background:var(--bg-light);border-radius:var(--radius-sm);padding:14px;font-size:12px;color:var(--text-light);margin-bottom:20px">
+      <strong style="color:var(--text-dark);display:block;margin-bottom:6px"><i class="fas fa-lightbulb" style="color:var(--accent)"></i> Tips for best results:</strong>
+      <ul style="display:flex;flex-direction:column;gap:4px">
+        <li>• Stand in front of a light background</li>
+        <li>• Full body visible in the frame</li>
+        <li>• Stand straight, arms slightly away from body</li>
+        <li>• Use good lighting</li>
+      </ul>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:8px 0 20px">
+
+    <!-- STEP 2: Select Clothing -->
+    <h3><span style="background:var(--accent);color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;margin-right:6px">2</span> Select Clothing Item</h3>
+    <p id="selected-item-name" style="font-size:12px;color:var(--accent);font-weight:600;margin-bottom:10px;min-height:18px"></p>
+    <div class="clothing-grid" id="clothing-grid"></div>
+    <a href="shop.html" class="btn btn-outline btn-full" style="margin-top:12px;font-size:12px">
+      <i class="fas fa-store"></i> Browse More Products
+    </a>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:20px 0">
+
+    <!-- STEP 3: Adjust & Save -->
+    <h3><span style="background:var(--accent);color:#fff;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;margin-right:6px">3</span> Adjust & Save</h3>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="btn btn-primary btn-full" id="download-btn" disabled>
+        <i class="fas fa-download"></i> Save My Outfit
+      </button>
+      <button class="btn btn-outline btn-full" id="reset-btn" disabled>
+        <i class="fas fa-undo"></i> Reset Position
+      </button>
+      <button class="btn btn-outline btn-full" id="remove-photo-btn">
+        <i class="fas fa-times"></i> Remove Photo
+      </button>
+    </div>
+
+    <div style="margin-top:16px;background:rgba(102,126,234,0.1);border:1px solid rgba(102,126,234,0.3);border-radius:var(--radius-sm);padding:12px;font-size:12px;color:#5a6fd6">
+      <i class="fas fa-shield-alt"></i> Your photos are processed locally in your browser and are never uploaded to our servers.
+    </div>
+  </div>
+
+  <!-- CANVAS AREA -->
+  <div class="tryon-canvas-area">
+    <div class="tryon-toolbar">
+      <div class="opacity-slider">
+        <i class="fas fa-layer-group" style="color:var(--accent)"></i>
+        <span>Clothing Opacity:</span>
+        <input type="range" id="opacity-slider" min="30" max="100" value="85" style="width:100px">
+        <span id="opacity-val">85%</span>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px">
+        <button class="btn btn-sm btn-outline" onclick="showToast('Share feature coming soon!','info')">
+          <i class="fas fa-share-alt"></i> Share Look
+        </button>
+        <a href="shop.html" class="btn btn-sm btn-accent"><i class="fas fa-shopping-bag"></i> Buy This Item</a>
+      </div>
+    </div>
+
+    <div class="tryon-canvas-container">
+      <!-- Placeholder (shown before photo upload) -->
+      <div class="tryon-placeholder" id="canvas-placeholder">
+        <i class="fas fa-user-circle" style="font-size:80px;color:#ccc;display:block;margin-bottom:16px"></i>
+        <p style="font-size:16px;font-weight:600;margin-bottom:8px">Upload your photo to get started</p>
+        <p style="font-size:13px;color:#aaa">Then select a clothing item from the left panel to see it on you</p>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+          <div style="text-align:center">
+            <i class="fas fa-upload" style="font-size:24px;color:var(--accent);display:block;margin-bottom:8px"></i>
+            <span style="font-size:12px;color:#aaa">Upload Photo</span>
+          </div>
+          <div style="color:#ccc;font-size:20px;display:flex;align-items:center">→</div>
+          <div style="text-align:center">
+            <i class="fas fa-tshirt" style="font-size:24px;color:var(--accent);display:block;margin-bottom:8px"></i>
+            <span style="font-size:12px;color:#aaa">Select Item</span>
+          </div>
+          <div style="color:#ccc;font-size:20px;display:flex;align-items:center">→</div>
+          <div style="text-align:center">
+            <i class="fas fa-arrows-alt" style="font-size:24px;color:var(--accent);display:block;margin-bottom:8px"></i>
+            <span style="font-size:12px;color:#aaa">Drag to Fit</span>
+          </div>
+          <div style="color:#ccc;font-size:20px;display:flex;align-items:center">→</div>
+          <div style="text-align:center">
+            <i class="fas fa-download" style="font-size:24px;color:var(--accent);display:block;margin-bottom:8px"></i>
+            <span style="font-size:12px;color:#aaa">Save Outfit</span>
+          </div>
+        </div>
+      </div>
+      <canvas id="tryon-canvas" style="display:none;max-width:100%;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.2)"></canvas>
+    </div>
+
+    <div style="padding:12px 20px;border-top:1px solid var(--border);background:rgba(201,168,76,0.06)">
+      <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text-light)">
+        <span><i class="fas fa-mouse-pointer" style="color:var(--accent)"></i> <strong>Drag</strong> the clothing to reposition</span>
+        <span><i class="fas fa-expand-arrows-alt" style="color:var(--accent)"></i> <strong>Corner handle</strong> to resize</span>
+        <span><i class="fas fa-download" style="color:var(--accent)"></i> Click <strong>Save My Outfit</strong> to download</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED PRODUCTS SECTION -->
+<section class="bg-light" style="margin-top:0">
+  <div class="container">
+    <div class="section-header"><h2>Try These Items</h2><p>Click on any product to try it on virtually</p></div>
+    <div class="products-grid" id="tryon-products-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="nav-logo">LUXE <span>THREADS</span></div><p>Premium clothing for the modern lifestyle.</p></div>
+      <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html?category=casual">Casual</a></li><li><a href="shop.html?category=office">Office</a></li></ul></div>
+      <div class="footer-col"><h4>Features</h4><ul><li><a href="virtual-tryon.html">Virtual Try-On</a></li><li><a href="#">Size Guide</a></li><li><a href="#">Style Tips</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">+94 11 234 5678</a></li><li><a href="#">hello@luxethreads.lk</a></li></ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 Luxe Threads. All rights reserved.</p></div></div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/virtual-tryon.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const opacitySlider = document.getElementById('opacity-slider');
+  const opacityVal = document.getElementById('opacity-val');
+  if (opacitySlider && opacityVal) {
+    opacitySlider.addEventListener('input', () => { opacityVal.textContent = opacitySlider.value + '%'; });
+  }
+  const canvas = document.getElementById('tryon-canvas');
+  const placeholder = document.getElementById('canvas-placeholder');
+  if (canvas && placeholder) {
+    const origLoad = window.loadUserPhoto;
+    window.loadUserPhoto = function(file) {
+      origLoad && origLoad(file);
+      placeholder.style.display = 'none';
+      canvas.style.display = 'block';
+    };
+  }
+  const grid = document.getElementById('tryon-products-grid');
+  if (grid) {
+    grid.innerHTML = LuxeData.products.slice(0,4).map(p => `
+      <div class="product-card">
+        <div class="product-card-img">
+          <a href="virtual-tryon.html?id=${p.id}"><img src="${p.images[0]}" alt="${p.name}" onerror="this.src='https://placehold.co/300x400/e8e8e8/555?text=Product'"></a>
+        </div>
+        <div class="product-card-info">
+          <div class="product-card-category">${p.subcategory}</div>
+          <div class="product-card-name">${p.name}</div>
+          <div class="product-card-price"><span class="price-current">Rs. ${p.price.toLocaleString()}</span></div>
+        </div>
+        <div class="product-card-footer">
+          <a href="virtual-tryon.html?id=${p.id}" class="btn btn-primary btn-full"><i class="fas fa-camera"></i> Try On</a>
+        </div>
+      </div>`).join('');
+  }
+  window.loadUserPhoto = function(file) {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const tryon = window.tryon_userPhoto !== undefined;
+        userPhoto = img;
+        const maxW = Math.min(600, img.width);
+        const scale = maxW / img.width;
+        canvas.width = maxW;
+        canvas.height = img.height * scale;
+        centerOverlay();
+        render();
+        placeholder.style.display = 'none';
+        canvas.style.display = 'block';
+        document.getElementById('download-btn')?.removeAttribute('disabled');
+        document.getElementById('reset-btn')?.removeAttribute('disabled');
+        showToast('Photo loaded! Now select a clothing item.', 'success');
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Luxe Threads</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body style="padding:0">
+<div class="toast-container"></div>
+
+<!-- ADMIN LOGIN OVERLAY -->
+<div id="admin-login-overlay" style="position:fixed;inset:0;background:var(--primary);z-index:9999;display:flex;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:var(--radius-lg);padding:40px;width:100%;max-width:380px;box-shadow:var(--shadow-lg)">
+    <div style="text-align:center;margin-bottom:28px">
+      <div class="nav-logo" style="font-size:24px;justify-content:center;display:flex">LUXE <span style="color:var(--accent);margin-left:4px">THREADS</span></div>
+      <p style="font-size:13px;color:var(--text-light);margin-top:8px">Admin Panel Access</p>
+    </div>
+    <form id="admin-login-form">
+      <div class="form-group" style="margin-bottom:16px">
+        <label>Admin Password</label>
+        <input type="password" id="admin-pass" placeholder="Enter admin password" required>
+        <p style="font-size:11px;color:var(--text-light);margin-top:6px">Hint: admin123</p>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg"><i class="fas fa-lock"></i> Access Dashboard</button>
+    </form>
+    <div style="text-align:center;margin-top:16px"><a href="index.html" style="font-size:13px;color:var(--text-light)"><i class="fas fa-arrow-left"></i> Back to Store</a></div>
+  </div>
+</div>
+
+<div class="admin-layout">
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="admin-logo">
+      <h2>LUXE <span style="color:var(--accent)">ADMIN</span></h2>
+      <span>Control Panel</span>
+    </div>
+    <nav class="admin-nav">
+      <div class="admin-nav-section">Main</div>
+      <div class="admin-nav-item active" data-section="dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></div>
+      <div class="admin-nav-section">Catalog</div>
+      <div class="admin-nav-item" data-section="products"><i class="fas fa-tshirt"></i><span>Products</span></div>
+      <div class="admin-nav-item" data-section="categories"><i class="fas fa-tags"></i><span>Categories</span></div>
+      <div class="admin-nav-section">Commerce</div>
+      <div class="admin-nav-item" data-section="orders"><i class="fas fa-shopping-bag"></i><span>Orders</span></div>
+      <div class="admin-nav-item" data-section="reviews"><i class="fas fa-star"></i><span>Reviews <span style="background:var(--accent);color:#fff;padding:2px 6px;border-radius:10px;font-size:10px" id="pending-badge">4</span></span></div>
+      <div class="admin-nav-section">Users</div>
+      <div class="admin-nav-item" data-section="customers"><i class="fas fa-users"></i><span>Customers</span></div>
+      <div class="admin-nav-section">Settings</div>
+      <div class="admin-nav-item" data-section="settings"><i class="fas fa-cog"></i><span>Store Settings</span></div>
+      <div class="admin-nav-item" onclick="adminLogout()" style="color:rgba(255,255,255,0.5);margin-top:24px"><i class="fas fa-sign-out-alt"></i><span>Logout</span></div>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1 id="admin-page-title">Dashboard</h1>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span style="font-size:13px;color:var(--text-light)">Welcome, Admin</span>
+        <a href="index.html" class="btn btn-outline btn-sm" target="_blank"><i class="fas fa-external-link-alt"></i> View Store</a>
+      </div>
+    </div>
+
+    <!-- DASHBOARD SECTION -->
+    <div class="admin-section" id="admin-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:rgba(201,168,76,0.15)"><i class="fas fa-dollar-sign" style="color:var(--accent)"></i></div>
+          <div class="stat-card-value" id="stat-revenue">--</div>
+          <div class="stat-card-label">Total Revenue</div>
+          <div class="stat-card-change up"><i class="fas fa-arrow-up"></i> +18% from last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:rgba(41,128,185,0.15)"><i class="fas fa-shopping-bag" style="color:var(--info)"></i></div>
+          <div class="stat-card-value" id="stat-orders">--</div>
+          <div class="stat-card-label">Total Orders</div>
+          <div class="stat-card-change up"><i class="fas fa-arrow-up"></i> +24 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:rgba(39,174,96,0.15)"><i class="fas fa-tshirt" style="color:var(--success)"></i></div>
+          <div class="stat-card-value" id="stat-products">--</div>
+          <div class="stat-card-label">Active Products</div>
+          <div class="stat-card-change up"><i class="fas fa-arrow-up"></i> +3 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon" style="background:rgba(231,76,60,0.15)"><i class="fas fa-star" style="color:var(--error)"></i></div>
+          <div class="stat-card-value" id="stat-reviews">--</div>
+          <div class="stat-card-label">Pending Reviews</div>
+          <div class="stat-card-change" style="color:var(--warning)"><i class="fas fa-clock"></i> Awaiting approval</div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div class="admin-table-card">
+          <h3>Recent Orders <a href="#" onclick="document.querySelector('[data-section=orders]').click()" style="font-size:12px;color:var(--accent);font-weight:500">View All</a></h3>
+          <table class="data-table">
+            <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead>
+            <tbody id="dash-recent-orders"></tbody>
+          </table>
+        </div>
+        <div class="admin-table-card">
+          <h3>Top Products</h3>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div id="top-products-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS SECTION -->
+    <div class="admin-section hidden" id="admin-products">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 style="font-size:18px;font-weight:700">Products</h2>
+        <button class="btn btn-primary" onclick="openModal('product-edit-modal')"><i class="fas fa-plus"></i> Add Product</button>
+      </div>
+      <div class="admin-table-card">
+        <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <input type="text" placeholder="Search products..." style="padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;flex:1;min-width:160px">
+          <select style="padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px">
+            <option>All Categories</option><option>Casual</option><option>Office</option>
+          </select>
+          <select style="padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px">
+            <option>All Badges</option><option>New</option><option>Sale</option><option>Hot</option>
+          </select>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Reviews</th><th>Rating</th><th>Badge</th><th>Actions</th></tr></thead>
+          <tbody id="products-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ORDERS SECTION -->
+    <div class="admin-section hidden" id="admin-orders">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 style="font-size:18px;font-weight:700">Orders</h2>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-outline btn-sm" onclick="showToast('Export feature coming soon!','info')"><i class="fas fa-download"></i> Export</button>
+        </div>
+      </div>
+      <div class="admin-tabs">
+        <button class="admin-tab active">All Orders</button>
+        <button class="admin-tab">Processing</button>
+        <button class="admin-tab">Shipped</button>
+        <button class="admin-tab">Delivered</button>
+      </div>
+      <div class="admin-table-card">
+        <table class="data-table">
+          <thead><tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Payment</th><th>Status</th><th>Update</th></tr></thead>
+          <tbody id="orders-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REVIEWS SECTION -->
+    <div class="admin-section hidden" id="admin-reviews">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <h2 style="font-size:18px;font-weight:700">Review Moderation</h2>
+        <div style="background:rgba(243,156,18,0.12);border:1px solid rgba(243,156,18,0.3);color:var(--warning);padding:8px 16px;border-radius:var(--radius-full);font-size:13px;font-weight:600">
+          <i class="fas fa-clock"></i> <span id="pending-review-count">4</span> reviews pending approval
+        </div>
+      </div>
+      <div class="admin-table-card">
+        <div style="margin-bottom:16px;padding:14px;background:rgba(41,128,185,0.08);border-radius:var(--radius-sm);font-size:13px;color:var(--info)">
+          <i class="fas fa-info-circle"></i> Only verified purchasers can submit reviews. All reviews are screened for inappropriate content before appearing here for your approval.
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Reviewer</th><th>Product</th><th>Rating</th><th>Review</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody id="reviews-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CUSTOMERS SECTION -->
+    <div class="admin-section hidden" id="admin-customers">
+      <h2 style="font-size:18px;font-weight:700;margin-bottom:24px">Customers</h2>
+      <div class="admin-table-card">
+        <table class="data-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Joined</th><th>Orders</th><th>Total Spent</th><th>Actions</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Amali F.</strong></td><td>amali@email.com</td><td>2026-01-15</td><td>5</td><td>Rs. 42,500</td><td><div class="action-btns"><button class="action-btn edit"><i class="fas fa-eye"></i></button><button class="action-btn delete"><i class="fas fa-ban"></i></button></div></td></tr>
+            <tr><td><strong>Ruwan K.</strong></td><td>ruwan@email.com</td><td>2026-02-20</td><td>2</td><td>Rs. 14,300</td><td><div class="action-btns"><button class="action-btn edit"><i class="fas fa-eye"></i></button><button class="action-btn delete"><i class="fas fa-ban"></i></button></div></td></tr>
+            <tr><td><strong>Dilini A.</strong></td><td>dilini@email.com</td><td>2026-03-05</td><td>8</td><td>Rs. 68,000</td><td><div class="action-btns"><button class="action-btn edit"><i class="fas fa-eye"></i></button><button class="action-btn delete"><i class="fas fa-ban"></i></button></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SETTINGS SECTION -->
+    <div class="admin-section hidden" id="admin-settings">
+      <h2 style="font-size:18px;font-weight:700;margin-bottom:24px">Store Settings</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div class="admin-table-card">
+          <h3>General</h3>
+          <div class="form-group" style="margin-bottom:14px"><label>Store Name</label><input type="text" value="Luxe Threads"></div>
+          <div class="form-group" style="margin-bottom:14px"><label>Contact Email</label><input type="email" value="hello@luxethreads.lk"></div>
+          <div class="form-group" style="margin-bottom:14px"><label>Contact Phone</label><input type="tel" value="+94 11 234 5678"></div>
+          <button class="btn btn-primary" onclick="showToast('Settings saved!','success')"><i class="fas fa-save"></i> Save</button>
+        </div>
+        <div class="admin-table-card">
+          <h3>Payment Methods</h3>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            ${['Cash on Delivery (COD)','Visa Card','Mastercard','American Express (AMEX)','KOKO','Mintpay'].map(m => `
+            <label style="display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer">
+              <input type="checkbox" checked> ${m}
+            </label>`).join('')}
+          </div>
+          <button class="btn btn-primary mt-3" onclick="showToast('Payment settings saved!','success')"><i class="fas fa-save"></i> Save</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- PRODUCT EDIT MODAL -->
+<div class="modal-overlay" id="product-edit-modal">
+  <div class="modal modal-md">
+    <div class="modal-header">
+      <h3>Edit Product</h3>
+      <button class="modal-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="product-modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline modal-close">Cancel</button>
+      <button class="btn btn-primary" id="save-product-btn"><i class="fas fa-save"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/admin.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const orders = AdminData.getOrders().slice(0, 5);
+  const tbody = document.getElementById('dash-recent-orders');
+  if (tbody) tbody.innerHTML = orders.map(o => `
+    <tr><td>#${o.id.slice(-6)}</td><td>${o.customer}</td><td style="font-weight:700">${formatPrice(o.total)}</td>
+    <td><span class="order-status ${o.status}">${o.status}</span></td></tr>`).join('');
+  const top = document.getElementById('top-products-list');
+  if (top) top.innerHTML = LuxeData.products.sort((a,b)=>b.reviewCount-a.reviewCount).slice(0,5).map((p,i) => `
+    <div style="display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:14px;font-weight:800;color:var(--text-light);width:20px">#${i+1}</span>
+      <div style="flex:1"><div style="font-size:13px;font-weight:600">${p.name}</div><div style="font-size:11px;color:var(--text-light)">${p.reviewCount} reviews</div></div>
+      <div style="font-size:13px;font-weight:700">${formatPrice(p.price)}</div>
+    </div>`).join('');
+  document.querySelectorAll('.admin-nav-item[data-section]').forEach(item => {
+    item.addEventListener('click', () => {
+      document.getElementById('admin-page-title').textContent = item.querySelector('span')?.textContent?.replace(/\d+/g,'').trim() || 'Dashboard';
+    });
+  });
+  localStorage.setItem('luxe_admin', localStorage.getItem('luxe_admin') || '');
+  const overlay = document.getElementById('admin-login-overlay');
+  if (localStorage.getItem('luxe_admin') === 'authenticated') { if (overlay) overlay.style.display = 'none'; }
+  else { if (overlay) overlay.style.display = 'flex'; }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All — Luxe Threads</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="page-loader"><div class="spinner"></div></div>
+<div class="toast-container"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">LUXE <span>THREADS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="shop.html?category=casual">Casual</a></li>
+      <li><a href="shop.html?category=office">Office Wear</a></li>
+      <li><a href="virtual-tryon.html">Virtual Try-On</a></li>
+    </ul>
+    <div class="nav-search">
+      <i class="fas fa-search"></i>
+      <input type="text" id="nav-search-input" placeholder="Search styles…">
+    </div>
+    <div class="nav-actions">
+      <a href="account.html" class="nav-icon-btn nav-account-btn" title="Account"><i class="fas fa-user"></i></a>
+      <a href="account.html#wishlist" class="nav-icon-btn" title="Wishlist">
+        <i class="far fa-heart"></i><span class="badge wishlist-count" style="display:none">0</span>
+      </a>
+      <a href="cart.html" class="nav-icon-btn" title="Cart">
+        <i class="fas fa-shopping-bag"></i><span class="badge cart-count" style="display:none">0</span>
+      </a>
+    </div>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="nav-mobile" id="mobile-nav">
+  <ul class="nav-mobile-links">
+    <li><a href="index.html"><i class="fas fa-home" style="width:20px"></i> Home</a></li>
+    <li><a href="shop.html"><i class="fas fa-store" style="width:20px"></i> Shop All</a></li>
+    <li><a href="shop.html?category=casual"><i class="fas fa-tshirt" style="width:20px"></i> Casual Wear</a></li>
+    <li><a href="shop.html?category=office"><i class="fas fa-briefcase" style="width:20px"></i> Office Wear</a></li>
+    <li><a href="virtual-tryon.html"><i class="fas fa-camera" style="width:20px"></i> Virtual Try-On</a></li>
+    <li><a href="cart.html"><i class="fas fa-shopping-bag" style="width:20px"></i> Cart</a></li>
+  </ul>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb bg-light" style="padding:12px 0">
+  <div class="container">
+    <ul class="flex" style="gap:8px;align-items:center;font-size:13px;color:var(--text-light)">
+      <li><a href="index.html">Home</a></li>
+      <li><i class="fas fa-chevron-right" style="font-size:10px"></i></li>
+      <li style="color:var(--text-dark)">Shop All</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SHOP BANNER -->
+<div style="background:var(--primary);padding:40px 0;text-align:center;color:#fff">
+  <h1 style="font-size:36px;font-weight:800">Shop All Collections</h1>
+  <p style="color:rgba(255,255,255,0.7);margin-top:8px">Explore our full range of casual and office wear</p>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+  <div class="shop-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="shop-sidebar">
+      <!-- Search -->
+      <div class="filter-panel">
+        <div style="display:flex;align-items:center;gap:8px;background:var(--bg-light);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px">
+          <i class="fas fa-search" style="color:var(--text-light)"></i>
+          <input type="text" id="search-input" placeholder="Search products..." style="border:none;background:none;outline:none;font-size:13px;width:100%">
+        </div>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="filter-panel">
+        <h3><span>Category</span> <i class="fas fa-chevron-down" style="font-size:11px;color:var(--text-light)"></i></h3>
+        <div class="filter-options">
+          <label class="filter-option"><input type="checkbox" class="filter-category" value="casual"><label>Casual Wear <span>6</span></label></label>
+          <label class="filter-option"><input type="checkbox" class="filter-category" value="office"><label>Office Wear <span>6</span></label></label>
+        </div>
+      </div>
+
+      <!-- Size Filter -->
+      <div class="filter-panel">
+        <h3><span>Size</span> <i class="fas fa-chevron-down" style="font-size:11px;color:var(--text-light)"></i></h3>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          ${['XS','S','M','L','XL','XXL','3XL','28','30','32','34','36','38'].map(s => `
+          <label style="display:flex;align-items:center">
+            <input type="checkbox" class="filter-size" value="${s}" style="display:none">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:36px;border:1.5px solid var(--border);border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;transition:var(--transition)"
+              onclick="this.closest('label').querySelector('input').click();this.style.background=this.closest('label').querySelector('input').checked?'var(--primary)':'#fff';this.style.color=this.closest('label').querySelector('input').checked?'#fff':'var(--text-medium)';this.style.borderColor=this.closest('label').querySelector('input').checked?'var(--primary)':'var(--border)'">${s}</span>
+          </label>`).join('')}
+        </div>
+      </div>
+
+      <!-- Color Filter -->
+      <div class="filter-panel">
+        <h3><span>Color</span> <i class="fas fa-chevron-down" style="font-size:11px;color:var(--text-light)"></i></h3>
+        <div class="color-filter">
+          ${[{n:'White',c:'#FFFFFF'},{n:'Black',c:'#1a1a1a'},{n:'Navy',c:'#1a1a2e'},{n:'Khaki',c:'#C3B091'},{n:'Sage Green',c:'#87A96B'},{n:'Blush',c:'#FFB6C1'},{n:'Camel',c:'#C19A6B'},{n:'Sky Blue',c:'#87CEEB'},{n:'Terracotta',c:'#C66B3D'},{n:'Burgundy',c:'#800020'}].map(col => `
+          <div class="color-filter-item">
+            <input type="checkbox" class="filter-color" id="col-${col.n.replace(/\s/g,'')}" value="${col.n}">
+            <label for="col-${col.n.replace(/\s/g,'')}" style="background:${col.c};${col.c==='#FFFFFF'?'border:2px solid #ddd':''}" title="${col.n}"></label>
+          </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Price Range -->
+      <div class="filter-panel">
+        <h3><span>Price Range</span></h3>
+        <div class="price-range">
+          <input type="range" id="price-range" class="range-slider" min="0" max="20000" value="20000" step="500">
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-light)">
+            <span>Rs. 0</span>
+            <span>Up to <strong id="price-max-display">Rs. 20,000</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-outline btn-full" id="clear-filters"><i class="fas fa-times"></i> Clear All Filters</button>
+    </aside>
+
+    <!-- PRODUCTS -->
+    <div>
+      <div class="shop-top">
+        <div class="shop-top-left" id="result-count">Loading products...</div>
+        <div class="shop-top-right">
+          <button class="btn btn-sm btn-outline" id="mobile-filter-btn" style="display:none">
+            <i class="fas fa-sliders-h"></i> Filter
+          </button>
+          <select id="sort-select" class="sort-select">
+            <option value="featured">Featured</option>
+            <option value="newest">Newest</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Best Rated</option>
+            <option value="discount">Biggest Discount</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="grid" title="Grid View"><i class="fas fa-th"></i></button>
+            <button class="view-btn" data-view="list" title="List View"><i class="fas fa-list"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="active-filters" id="active-filters"></div>
+      <div class="products-grid" id="products-grid"></div>
+      <div class="pagination" id="pagination"></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUICK VIEW MODAL -->
+<div class="modal-overlay" id="quickview-modal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h3>Quick View</h3>
+      <button class="modal-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="quickview-body"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">LUXE <span>THREADS</span></div>
+        <p>Premium clothing for the modern lifestyle.</p>
+        <div class="footer-payments">
+          <p>We accept:</p>
+          <div class="payment-icons">
+            <span class="payment-icon">VISA</span><span class="payment-icon">MASTER</span>
+            <span class="payment-icon">AMEX</span><span class="payment-icon">KOKO</span>
+            <span class="payment-icon">MINTPAY</span><span class="payment-icon">COD</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html?category=casual">Casual Wear</a></li><li><a href="shop.html?category=office">Office Wear</a></li></ul></div>
+      <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Size Guide</a></li><li><a href="#">Returns</a></li><li><a href="#">Track Order</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">+94 11 234 5678</a></li><li><a href="#">hello@luxethreads.lk</a></li></ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 Luxe Threads. All rights reserved.</p></div></div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/shop.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileFilterBtn = document.getElementById('mobile-filter-btn');
+  if (window.innerWidth <= 768 && mobileFilterBtn) mobileFilterBtn.style.display = 'inline-flex';
+});
+</script>
+</body>
+</html>

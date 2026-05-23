@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxe Threads — Dress Your Best Story</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="page-loader"><div class="spinner"></div></div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">LUXE <span>THREADS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="shop.html?category=casual">Casual</a></li>
+      <li><a href="shop.html?category=office">Office Wear</a></li>
+      <li><a href="virtual-tryon.html">Virtual Try-On</a></li>
+    </ul>
+    <div class="nav-search">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search styles…">
+    </div>
+    <div class="nav-actions">
+      <a href="account.html" class="nav-icon-btn nav-account-btn" title="Account"><i class="fas fa-user"></i></a>
+      <a href="account.html#wishlist" class="nav-icon-btn" title="Wishlist">
+        <i class="far fa-heart"></i>
+        <span class="badge wishlist-count" style="display:none">0</span>
+      </a>
+      <a href="cart.html" class="nav-icon-btn" title="Cart">
+        <i class="fas fa-shopping-bag"></i>
+        <span class="badge cart-count" style="display:none">0</span>
+      </a>
+    </div>
+    <div class="nav-hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="mobile-nav">
+  <ul class="nav-mobile-links">
+    <li><a href="index.html"><i class="fas fa-home" style="width:20px"></i> Home</a></li>
+    <li><a href="shop.html"><i class="fas fa-store" style="width:20px"></i> Shop All</a></li>
+    <li><a href="shop.html?category=casual"><i class="fas fa-tshirt" style="width:20px"></i> Casual Wear</a></li>
+    <li><a href="shop.html?category=office"><i class="fas fa-briefcase" style="width:20px"></i> Office Wear</a></li>
+    <li><a href="virtual-tryon.html"><i class="fas fa-camera" style="width:20px"></i> Virtual Try-On</a></li>
+    <li><a href="account.html"><i class="fas fa-user" style="width:20px"></i> My Account</a></li>
+    <li><a href="cart.html"><i class="fas fa-shopping-bag" style="width:20px"></i> Cart</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content" data-animate>
+      <div class="hero-tag"><i class="fas fa-star" style="font-size:10px"></i> New Season Collection 2026</div>
+      <h1>Dress Your<br><span>Best Story</span><br>Every Day</h1>
+      <p>Discover curated collections of casual and office wear crafted for the modern professional. Quality that speaks, style that lasts.</p>
+      <div class="hero-actions">
+        <a href="shop.html" class="btn btn-accent btn-lg"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+        <a href="virtual-tryon.html" class="btn btn-white btn-lg"><i class="fas fa-camera"></i> Virtual Try-On</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">2,000+</div><div class="label">Happy Customers</div></div>
+        <div class="hero-stat"><div class="num">150+</div><div class="label">Premium Styles</div></div>
+        <div class="hero-stat"><div class="num">4.8★</div><div class="label">Avg. Rating</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section>
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-tag">Browse By</div>
+      <h2>Shop Categories</h2>
+      <p>From boardroom to weekend — we have everything you need</p>
+    </div>
+    <div class="category-grid" data-animate>
+      <a href="shop.html?category=casual" class="category-card large">
+        <img src="https://placehold.co/400x700/87A96B/ffffff?text=Casual+Wear" alt="Casual Wear">
+        <div class="category-card-overlay">
+          <h3>Casual Wear</h3>
+          <span>6 Collections</span>
+          <button class="btn btn-white btn-sm">Shop Now</button>
+        </div>
+      </a>
+      <a href="shop.html?category=office" class="category-card large">
+        <img src="https://placehold.co/400x700/36454f/ffffff?text=Office+Wear" alt="Office Wear">
+        <div class="category-card-overlay">
+          <h3>Office Wear</h3>
+          <span>6 Collections</span>
+          <button class="btn btn-white btn-sm">Shop Now</button>
+        </div>
+      </a>
+      <a href="shop.html?subcategory=Dresses" class="category-card">
+        <img src="https://placehold.co/400x350/D4849A/ffffff?text=Dresses" alt="Dresses">
+        <div class="category-card-overlay">
+          <h3>Dresses</h3>
+          <span>2 Collections</span>
+        </div>
+      </a>
+      <a href="shop.html?subcategory=Shirts" class="category-card">
+        <img src="https://placehold.co/400x350/5B7FA6/ffffff?text=Shirts" alt="Shirts">
+        <div class="category-card-overlay">
+          <h3>Shirts & Tops</h3>
+          <span>4 Collections</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="bg-light">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-tag">Bestsellers</div>
+      <h2>Featured Picks</h2>
+      <p>Handpicked by our style experts just for you</p>
+    </div>
+    <div class="products-grid" id="featured-grid">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="text-center mt-3" data-animate>
+      <a href="shop.html" class="btn btn-outline btn-lg">View All Products <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner" data-animate>
+  <div class="container">
+    <div class="promo-text">
+      <h2>🔥 Flash Sale — Up to 25% OFF!</h2>
+      <p>Use code <strong>LUXE20</strong> at checkout. Limited time offer.</p>
+    </div>
+    <div class="promo-timer" id="promo-timer-home"></div>
+    <a href="shop.html" class="btn btn-white btn-lg">Shop the Sale</a>
+  </div>
+</div>
+
+<!-- NEW ARRIVALS -->
+<section>
+  <div class="container">
+    <div class="section-header" data-animate>
+      <div class="section-tag">Fresh In</div>
+      <h2>New Arrivals</h2>
+      <p>Be the first to wear what's trending</p>
+    </div>
+    <div class="products-grid" id="new-arrivals-grid"></div>
+  </div>
+</section>
+
+<!-- VIRTUAL TRY-ON PROMO -->
+<section style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:80px 0">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center">
+    <div style="color:#fff" data-animate>
+      <div class="section-tag" style="background:rgba(255,255,255,0.2);color:#fff;margin:0 0 16px">New Feature</div>
+      <h2 style="font-size:40px;font-weight:800;margin-bottom:16px">Try Before<br>You Buy</h2>
+      <p style="color:rgba(255,255,255,0.8);font-size:16px;line-height:1.7;margin-bottom:28px">
+        Upload your photo and virtually try on any outfit from our collection. See how it looks on your body before adding to cart — making shopping smarter and more fun!
+      </p>
+      <ul style="color:rgba(255,255,255,0.85);margin-bottom:32px;display:flex;flex-direction:column;gap:12px">
+        <li style="display:flex;gap:10px;align-items:center"><i class="fas fa-check-circle" style="color:#7bed9f"></i> Upload any full-body photo</li>
+        <li style="display:flex;gap:10px;align-items:center"><i class="fas fa-check-circle" style="color:#7bed9f"></i> Overlay clothing and adjust to fit</li>
+        <li style="display:flex;gap:10px;align-items:center"><i class="fas fa-check-circle" style="color:#7bed9f"></i> Compare sizes visually</li>
+        <li style="display:flex;gap:10px;align-items:center"><i class="fas fa-check-circle" style="color:#7bed9f"></i> Save and share your look</li>
+      </ul>
+      <a href="virtual-tryon.html" class="btn btn-white btn-lg"><i class="fas fa-camera"></i> Try It Now — FREE</a>
+    </div>
+    <div style="background:rgba(255,255,255,0.1);border-radius:20px;padding:40px;text-align:center;color:#fff" data-animate>
+      <i class="fas fa-user-circle" style="font-size:120px;opacity:0.6;margin-bottom:20px;display:block"></i>
+      <p style="font-size:18px;font-weight:600">Upload Your Photo</p>
+      <p style="font-size:14px;opacity:0.7;margin:8px 0 20px">Works on all body types & styles</p>
+      <a href="virtual-tryon.html" class="btn btn-accent"><i class="fas fa-upload"></i> Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="bg-light">
+  <div class="container">
+    <div class="features-grid" data-animate>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-shipping-fast"></i></div>
+        <h3>Free Delivery</h3>
+        <p>Free shipping on orders over Rs. 5,000. Express options available.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-undo"></i></div>
+        <h3>Easy Returns</h3>
+        <p>14-day hassle-free returns. No questions asked.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-lock"></i></div>
+        <h3>Secure Payment</h3>
+        <p>SSL encrypted. Visa, Master, AMEX, KOKO & Mintpay accepted.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+        <h3>24/7 Support</h3>
+        <p>Our team is here to help you anytime, any day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="container newsletter-inner">
+    <div class="newsletter-text" data-animate>
+      <h2>Stay In Style</h2>
+      <p>Join our newsletter for exclusive offers, new arrivals, and style tips.</p>
+    </div>
+    <div class="newsletter-form" data-animate>
+      <form onsubmit="subscribeNewsletter(event)">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">LUXE <span>THREADS</span></div>
+        <p>We believe great clothing empowers great people. Premium quality, thoughtful design, for every chapter of your life.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+        <div class="footer-payments">
+          <p>We accept:</p>
+          <div class="payment-icons">
+            <span class="payment-icon">VISA</span>
+            <span class="payment-icon">MASTER</span>
+            <span class="payment-icon">AMEX</span>
+            <span class="payment-icon">KOKO</span>
+            <span class="payment-icon">MINTPAY</span>
+            <span class="payment-icon">COD</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="shop.html">Shop All</a></li>
+          <li><a href="shop.html?category=casual">Casual Wear</a></li>
+          <li><a href="shop.html?category=office">Office Wear</a></li>
+          <li><a href="virtual-tryon.html">Virtual Try-On</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns Policy</a></li>
+          <li><a href="#">Track My Order</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-phone" style="width:18px;color:var(--accent)"></i> +94 11 234 5678</a></li>
+          <li><a href="#"><i class="fas fa-envelope" style="width:18px;color:var(--accent)"></i> hello@luxethreads.lk</a></li>
+          <li><a href="#"><i class="fas fa-map-marker-alt" style="width:18px;color:var(--accent)"></i> Colombo 03, Sri Lanka</a></li>
+          <li><a href="#"><i class="fas fa-clock" style="width:18px;color:var(--accent)"></i> Mon–Sat: 9AM–8PM</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container flex-between" style="flex-wrap:wrap;gap:12px">
+      <p>© 2026 Luxe Threads. All rights reserved.</p>
+      <p><a href="#" style="color:rgba(255,255,255,0.4)">Privacy Policy</a> · <a href="#" style="color:rgba(255,255,255,0.4)">Terms of Service</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const featured = LuxeData.products.filter(p => p.isFeatured).slice(0, 4);
+  const newArrivals = LuxeData.products.filter(p => p.isNew).slice(0, 4);
+  const renderMini = (products, containerId) => {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = products.map(p => `
+      <div class="product-card" data-animate>
+        <div class="product-card-img">
+          <a href="product.html?id=${p.id}">
+            <img src="${p.images[0]}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/300x400/e8e8e8/555?text=Product'">
+          </a>
+          ${p.badge ? `<div class="product-card-badges"><span class="product-badge ${p.badge}">${p.badge.toUpperCase()}</span></div>` : ''}
+          <div class="product-card-actions">
+            <button onclick="toggleWishlistHome(${p.id},this)" title="Wishlist"><i class="far fa-heart"></i></button>
+            <a href="virtual-tryon.html?id=${p.id}" title="Virtual Try-On" style="width:36px;height:36px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:var(--shadow-sm);transition:var(--transition)"><i class="fas fa-camera"></i></a>
+          </div>
+        </div>
+        <div class="product-card-info">
+          <div class="product-card-category">${p.subcategory}</div>
+          <a href="product.html?id=${p.id}" class="product-card-name">${p.name}</a>
+          <div class="product-card-price">
+            <span class="price-current">Rs. ${p.price.toLocaleString()}</span>
+            ${p.discount ? `<span class="price-original">Rs. ${p.originalPrice.toLocaleString()}</span><span class="price-discount">-${p.discount}%</span>` : ''}
+          </div>
+          <div class="product-card-rating">
+            ${renderStars(p.rating)}
+            <span class="rating-count">(${p.reviewCount})</span>
+          </div>
+          <div class="product-card-colors">
+            ${p.colors.slice(0,4).map(c => `<span class="color-dot" style="background:${c.code};${c.code==='#FFFFFF'?'border:1px solid #ddd':''}" title="${c.name}"></span>`).join('')}
+          </div>
+        </div>
+        <div class="product-card-footer">
+          <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:13px;padding:10px" onclick="addToCartHome(${p.id})">
+            <i class="fas fa-shopping-bag"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+    `).join('');
+  };
+  renderMini(featured, 'featured-grid');
+  renderMini(newArrivals, 'new-arrivals-grid');
+  window.addToCartHome = (id) => {
+    const p = LuxeData.products.find(pr => pr.id === id);
+    const size = p.sizes.find(s => !p.outOfStock.includes(s)) || p.sizes[0];
+    Cart.add(p, size, p.colors[0]?.name || '');
+  };
+  window.toggleWishlistHome = (id, btn) => {
+    const added = Wishlist.toggle(id);
+    btn.className = added ? 'wishlisted' : '';
+    btn.innerHTML = `<i class="fa${added ? 's' : 'r'} fa-heart"></i>`;
+  };
+  window.subscribeNewsletter = (e) => {
+    e.preventDefault();
+    showToast('Thank you for subscribing! Welcome to the Luxe family.', 'success', 'Subscribed!');
+    e.target.reset();
+  };
+});
+</script>
+</body>
+</html>

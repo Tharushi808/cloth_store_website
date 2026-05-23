@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account — Luxe Threads</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="page-loader"><div class="spinner"></div></div>
+<div class="toast-container"></div>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">LUXE <span>THREADS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li>
+      <li><a href="shop.html?category=casual">Casual</a></li><li><a href="shop.html?category=office">Office Wear</a></li>
+    </ul>
+    <div class="nav-search"><i class="fas fa-search"></i><input type="text" placeholder="Search styles…"></div>
+    <div class="nav-actions">
+      <a href="account.html" class="nav-icon-btn nav-account-btn"><i class="fas fa-user"></i></a>
+      <a href="account.html#wishlist" class="nav-icon-btn"><i class="far fa-heart"></i><span class="badge wishlist-count" style="display:none">0</span></a>
+      <a href="cart.html" class="nav-icon-btn"><i class="fas fa-shopping-bag"></i><span class="badge cart-count" style="display:none">0</span></a>
+    </div>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="nav-mobile" id="mobile-nav"><ul class="nav-mobile-links"><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="cart.html">Cart</a></li></ul></div>
+
+<div style="background:var(--primary);padding:32px 0;text-align:center;color:#fff">
+  <h1 style="font-size:28px;font-weight:800"><i class="fas fa-user-circle"></i> My Account</h1>
+</div>
+
+<!-- AUTH PANEL (shown when NOT logged in) -->
+<div id="auth-panel">
+  <div class="auth-container">
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Sign In</button>
+      <button class="auth-tab" data-tab="register">Create Account</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="auth-form" id="login-form-wrapper">
+      <div class="auth-form-content" id="login-form">
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:20px">Welcome Back</h2>
+        <div class="social-login">
+          <button class="social-btn" onclick="showToast('Google login coming soon!','info')">
+            <i class="fab fa-google" style="color:#db4437;font-size:18px"></i> Continue with Google
+          </button>
+          <button class="social-btn" onclick="showToast('Facebook login coming soon!','info')">
+            <i class="fab fa-facebook-f" style="color:#1877f2;font-size:18px"></i> Continue with Facebook
+          </button>
+        </div>
+        <div class="divider"><span>OR</span></div>
+        <form id="login-form" novalidate>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Email Address</label>
+            <input type="email" id="login-email" placeholder="you@email.com" required>
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Password</label>
+            <div style="position:relative">
+              <input type="password" id="login-pass" placeholder="Your password" required style="width:100%">
+              <button type="button" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--text-light)" onclick="const inp=document.getElementById('login-pass');inp.type=inp.type==='password'?'text':'password'"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+              <input type="checkbox"> Remember me
+            </label>
+            <a href="#" style="font-size:13px;color:var(--accent)">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full btn-lg">Sign In</button>
+        </form>
+        <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--text-light)">
+          Don't have an account? <a href="#" style="color:var(--accent)" onclick="document.querySelector('[data-tab=register]').click()">Create one</a>
+        </p>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div class="auth-form-content hidden" id="register-form">
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:20px">Create Your Account</h2>
+        <form id="register-form" novalidate>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Full Name</label>
+            <input type="text" id="reg-name" placeholder="Kamal Perera" required>
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Email Address</label>
+            <input type="email" id="reg-email" placeholder="kamal@email.com" required>
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Phone Number</label>
+            <input type="tel" id="reg-phone" placeholder="+94 77 123 4567">
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Password (min 8 characters)</label>
+            <input type="password" id="reg-pass" placeholder="Create a strong password" required>
+          </div>
+          <div class="form-group" style="margin-bottom:20px">
+            <label>Confirm Password</label>
+            <input type="password" id="reg-confirm" placeholder="Repeat your password" required>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--text-medium);margin-bottom:20px;cursor:pointer">
+            <input type="checkbox" required style="margin-top:2px;flex-shrink:0">
+            I agree to the <a href="#" style="color:var(--accent)">Terms of Service</a> and <a href="#" style="color:var(--accent)">Privacy Policy</a>
+          </label>
+          <button type="submit" class="btn btn-primary btn-full btn-lg">Create Account</button>
+        </form>
+        <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--text-light)">
+          Already have an account? <a href="#" style="color:var(--accent)" onclick="document.querySelector('[data-tab=login]').click()">Sign in</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACCOUNT PANEL (shown when logged in) -->
+<div id="account-panel" style="display:none">
+  <div class="container account-layout">
+    <!-- SIDEBAR -->
+    <div class="account-sidebar">
+      <div class="account-avatar">
+        <div class="avatar-img">U</div>
+        <div class="account-name">User Name</div>
+        <div class="account-email">user@email.com</div>
+      </div>
+      <nav class="account-nav">
+        <div class="account-nav-item active" data-section="orders">
+          <i class="fas fa-box"></i> <span>My Orders</span>
+        </div>
+        <div class="account-nav-item" data-section="wishlist">
+          <i class="far fa-heart"></i> <span>Wishlist</span>
+        </div>
+        <div class="account-nav-item" data-section="profile">
+          <i class="fas fa-user-edit"></i> <span>Edit Profile</span>
+        </div>
+        <div class="account-nav-item" data-section="addresses">
+          <i class="fas fa-map-marker-alt"></i> <span>Saved Addresses</span>
+        </div>
+        <div class="account-nav-item" data-section="settings">
+          <i class="fas fa-cog"></i> <span>Settings</span>
+        </div>
+        <div class="account-nav-item" onclick="logout()" style="color:var(--error);margin-top:16px">
+          <i class="fas fa-sign-out-alt"></i> <span>Sign Out</span>
+        </div>
+      </nav>
+    </div>
+
+    <!-- CONTENT -->
+    <div>
+      <!-- Orders -->
+      <div class="account-section" id="section-orders">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+          <h2 style="font-size:20px;font-weight:800">My Orders</h2>
+          <a href="shop.html" class="btn btn-outline btn-sm"><i class="fas fa-plus"></i> New Order</a>
+        </div>
+        <div id="orders-list"></div>
+      </div>
+
+      <!-- Wishlist -->
+      <div class="account-section hidden" id="section-wishlist">
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:24px">My Wishlist</h2>
+        <div class="products-grid" style="grid-template-columns:repeat(3,1fr)" id="wishlist-grid"></div>
+      </div>
+
+      <!-- Profile -->
+      <div class="account-section hidden" id="section-profile">
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:24px">Edit Profile</h2>
+        <div style="background:#fff;border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-sm)">
+          <form id="profile-form">
+            <div class="form-grid">
+              <div class="form-group full">
+                <label>Full Name</label>
+                <input type="text" id="profile-name" placeholder="Your full name">
+              </div>
+              <div class="form-group full">
+                <label>Email Address</label>
+                <input type="email" id="profile-email" placeholder="your@email.com">
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="profile-phone" placeholder="+94 77 123 4567">
+              </div>
+              <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="date" id="profile-dob">
+              </div>
+              <div class="form-group full">
+                <label>Change Password (leave blank to keep current)</label>
+                <input type="password" id="profile-newpass" placeholder="New password (min 8 chars)">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-save"></i> Save Changes</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Addresses -->
+      <div class="account-section hidden" id="section-addresses">
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:24px">Saved Addresses</h2>
+        <div style="background:#fff;border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-sm);text-align:center;color:var(--text-light)">
+          <i class="fas fa-map-marker-alt" style="font-size:48px;display:block;margin-bottom:16px"></i>
+          <p>No saved addresses yet.</p>
+          <button class="btn btn-primary mt-3" onclick="showToast('Address form coming soon!','info')"><i class="fas fa-plus"></i> Add New Address</button>
+        </div>
+      </div>
+
+      <!-- Settings -->
+      <div class="account-section hidden" id="section-settings">
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:24px">Settings</h2>
+        <div style="background:#fff;border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--border)">
+            <div><h4 style="font-size:14px;font-weight:600">Email Notifications</h4><p style="font-size:12px;color:var(--text-light)">Receive order updates and promotions</p></div>
+            <label style="display:flex;align-items:center;cursor:pointer;gap:8px">
+              <input type="checkbox" checked style="width:0;height:0;opacity:0">
+              <div style="width:44px;height:24px;background:var(--success);border-radius:12px;position:relative;transition:background 0.3s">
+                <div style="position:absolute;top:3px;right:3px;width:18px;height:18px;background:#fff;border-radius:50%"></div>
+              </div>
+            </label>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--border)">
+            <div><h4 style="font-size:14px;font-weight:600">SMS Notifications</h4><p style="font-size:12px;color:var(--text-light)">Get delivery updates via SMS</p></div>
+            <label style="display:flex;align-items:center;cursor:pointer;gap:8px">
+              <input type="checkbox" style="width:0;height:0;opacity:0">
+              <div style="width:44px;height:24px;background:var(--border);border-radius:12px;position:relative;transition:background 0.3s">
+                <div style="position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%"></div>
+              </div>
+            </label>
+          </div>
+          <button class="btn btn-outline" style="width:fit-content;color:var(--error);border-color:var(--error)" onclick="if(confirm('Delete account permanently?'))logout()">
+            <i class="fas fa-user-times"></i> Delete Account
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><div class="nav-logo">LUXE <span>THREADS</span></div><p>Premium clothing for the modern lifestyle.</p></div>
+      <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html?category=casual">Casual</a></li><li><a href="shop.html?category=office">Office</a></li></ul></div>
+      <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Returns</a></li><li><a href="#">Shipping</a></li><li><a href="#">FAQs</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">+94 11 234 5678</a></li><li><a href="#">hello@luxethreads.lk</a></li></ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 Luxe Threads. All rights reserved.</p></div></div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/account.js"></script>
+</body>
+</html>

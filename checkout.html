@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Luxe Threads</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="page-loader"><div class="spinner"></div></div>
+<div class="toast-container"></div>
+
+<nav class="nav" style="position:static">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">LUXE <span>THREADS</span></a>
+    <div style="font-size:13px;color:var(--text-light);display:flex;align-items:center;gap:8px">
+      <i class="fas fa-lock" style="color:var(--success)"></i> Secure Checkout
+    </div>
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn"><i class="fas fa-shopping-bag"></i><span class="badge cart-count" style="display:none">0</span></a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- STEP INDICATOR -->
+  <div class="checkout-steps" style="padding:24px 0">
+    <div class="checkout-step active" >
+      <div class="step-circle">1</div>
+      <span>Shipping</span>
+    </div>
+    <div class="step-divider"></div>
+    <div class="checkout-step">
+      <div class="step-circle">2</div>
+      <span>Payment</span>
+    </div>
+    <div class="step-divider"></div>
+    <div class="checkout-step">
+      <div class="step-circle">3</div>
+      <span>Review</span>
+    </div>
+    <div class="step-divider"></div>
+    <div class="checkout-step">
+      <div class="step-circle"><i class="fas fa-check"></i></div>
+      <span>Confirmed</span>
+    </div>
+  </div>
+
+  <div class="checkout-layout">
+    <!-- MAIN CONTENT -->
+    <div>
+
+      <!-- STEP 1: SHIPPING -->
+      <div class="checkout-section" data-step="1">
+        <h2><i class="fas fa-truck"></i> Shipping Information</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="ship-first" placeholder="Kamal" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" id="ship-last" placeholder="Perera" required>
+          </div>
+          <div class="form-group full">
+            <label>Street Address *</label>
+            <input type="text" id="ship-address" placeholder="123 Main Street, Apt 4B" required>
+          </div>
+          <div class="form-group">
+            <label>City *</label>
+            <input type="text" id="ship-city" placeholder="Colombo" required>
+          </div>
+          <div class="form-group">
+            <label>Province</label>
+            <select>
+              <option>Western Province</option><option>Central Province</option><option>Southern Province</option>
+              <option>Northern Province</option><option>Eastern Province</option><option>North Western</option>
+              <option>North Central</option><option>Uva Province</option><option>Sabaragamuwa</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Postal Code</label>
+            <input type="text" placeholder="00300">
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="ship-phone" placeholder="+94 77 123 4567" required>
+          </div>
+          <div class="form-group full">
+            <label>Email Address</label>
+            <input type="email" placeholder="kamal@email.com">
+          </div>
+          <div class="form-group full">
+            <label>Order Notes (optional)</label>
+            <textarea placeholder="Special instructions for your order..."></textarea>
+          </div>
+        </div>
+
+        <!-- DELIVERY OPTIONS -->
+        <h2 style="margin-top:28px"><i class="fas fa-shipping-fast"></i> Delivery Option</h2>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+          <label class="payment-method delivery-option active" data-delivery="standard" style="cursor:pointer">
+            <div class="payment-method-header">
+              <input type="radio" name="delivery" checked>
+              <span class="payment-method-name">Standard Delivery (5–7 business days)</span>
+              <span style="font-weight:700;color:var(--primary)">Rs. 350 <span style="font-size:11px;font-weight:400;color:var(--success)">(Free over Rs. 5,000)</span></span>
+            </div>
+          </label>
+          <label class="payment-method delivery-option" data-delivery="express" style="cursor:pointer">
+            <div class="payment-method-header">
+              <input type="radio" name="delivery">
+              <span class="payment-method-name">Express Delivery (2–3 business days)</span>
+              <span style="font-weight:700;color:var(--primary)">Rs. 650</span>
+            </div>
+          </label>
+          <label class="payment-method delivery-option" data-delivery="nextday" style="cursor:pointer">
+            <div class="payment-method-header">
+              <input type="radio" name="delivery">
+              <span class="payment-method-name">Next Day Delivery (1 business day)</span>
+              <span style="font-weight:700;color:var(--primary)">Rs. 950</span>
+            </div>
+          </label>
+        </div>
+
+        <div style="margin-top:24px;display:flex;justify-content:flex-end">
+          <button class="btn btn-primary btn-lg next-step-btn"><i class="fas fa-arrow-right"></i> Continue to Payment</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: PAYMENT -->
+      <div class="checkout-section" data-step="2" style="display:none">
+        <h2><i class="fas fa-credit-card"></i> Payment Method</h2>
+        <div class="payment-methods">
+
+          <!-- COD -->
+          <div class="payment-method active" data-payment="cod">
+            <div class="payment-method-header">
+              <input type="radio" name="payment" checked>
+              <div class="payment-method-name"><i class="fas fa-money-bill-wave" style="color:var(--success)"></i> Cash on Delivery (COD)</div>
+            </div>
+            <div class="payment-detail">
+              <div class="cod-info">
+                <i class="fas fa-info-circle"></i> Pay in cash when your order arrives. Please have the exact amount ready. COD is available island-wide.
+              </div>
+            </div>
+          </div>
+
+          <!-- VISA -->
+          <div class="payment-method" data-payment="visa">
+            <div class="payment-method-header">
+              <input type="radio" name="payment">
+              <div class="payment-method-name"><i class="fab fa-cc-visa" style="color:#1a1f71;font-size:18px"></i> Visa Card</div>
+              <div class="payment-logo">
+                <span class="payment-icon" style="background:#1a1f71;color:#fff;border:none">VISA</span>
+              </div>
+            </div>
+            <div class="payment-detail">
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label>Card Number</label>
+                  <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                </div>
+                <div class="form-group full">
+                  <label>Cardholder Name</label>
+                  <input type="text" id="card-name" placeholder="Name on card">
+                </div>
+                <div class="form-group">
+                  <label>Expiry (MM/YY)</label>
+                  <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group">
+                  <label>CVV</label>
+                  <input type="text" id="card-cvv" placeholder="123" maxlength="4">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MASTERCARD -->
+          <div class="payment-method" data-payment="master">
+            <div class="payment-method-header">
+              <input type="radio" name="payment">
+              <div class="payment-method-name"><i class="fab fa-cc-mastercard" style="color:#eb001b;font-size:18px"></i> Mastercard</div>
+              <div class="payment-logo"><span class="payment-icon" style="background:#eb001b;color:#fff;border:none">MC</span></div>
+            </div>
+            <div class="payment-detail">
+              <div class="form-grid">
+                <div class="form-group full"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19"></div>
+                <div class="form-group full"><label>Cardholder Name</label><input type="text" placeholder="Name on card"></div>
+                <div class="form-group"><label>Expiry (MM/YY)</label><input type="text" placeholder="MM/YY" maxlength="5"></div>
+                <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="4"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AMEX -->
+          <div class="payment-method" data-payment="amex">
+            <div class="payment-method-header">
+              <input type="radio" name="payment">
+              <div class="payment-method-name"><i class="fab fa-cc-amex" style="color:#007BC1;font-size:18px"></i> American Express</div>
+              <div class="payment-logo"><span class="payment-icon" style="background:#007BC1;color:#fff;border:none">AMEX</span></div>
+            </div>
+            <div class="payment-detail">
+              <div class="form-grid">
+                <div class="form-group full"><label>Card Number</label><input type="text" placeholder="3782 822463 10005" maxlength="17"></div>
+                <div class="form-group full"><label>Cardholder Name</label><input type="text" placeholder="Name on card"></div>
+                <div class="form-group"><label>Expiry (MM/YY)</label><input type="text" placeholder="MM/YY" maxlength="5"></div>
+                <div class="form-group"><label>4-digit CID</label><input type="text" placeholder="1234" maxlength="4"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KOKO -->
+          <div class="payment-method" data-payment="koko">
+            <div class="payment-method-header">
+              <input type="radio" name="payment">
+              <div class="payment-method-name">
+                <span style="background:#ff6b35;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:800">KOKO</span>
+                Buy Now, Pay Later — Interest Free
+              </div>
+            </div>
+            <div class="payment-detail">
+              <div class="installment-info">
+                <strong>Split your payment into 3 interest-free installments!</strong><br>
+                No hidden fees. No credit card needed. Instant approval with your NIC.
+                <div class="installment-plans">
+                  <div class="installment-plan active" data-months="3">3 months (0% interest)</div>
+                  <div class="installment-plan" data-months="6">6 months (0% interest)</div>
+                </div>
+                <div style="margin-top:12px">
+                  <div class="form-group"><label>NIC Number</label><input type="text" placeholder="Your National Identity Card number" style="margin-top:6px;border:1px solid var(--border);border-radius:4px;padding:10px 14px;font-size:13px;width:100%"></div>
+                  <div class="form-group" style="margin-top:12px"><label>Mobile Number (registered with KOKO)</label><input type="tel" placeholder="+94 7X XXX XXXX" style="margin-top:6px;border:1px solid var(--border);border-radius:4px;padding:10px 14px;font-size:13px;width:100%"></div>
+                </div>
+                <div style="font-size:11px;color:var(--text-light);margin-top:12px">You will receive an OTP on your registered mobile to complete the KOKO payment.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MINTPAY -->
+          <div class="payment-method" data-payment="mintpay">
+            <div class="payment-method-header">
+              <input type="radio" name="payment">
+              <div class="payment-method-name">
+                <span style="background:#00b894;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:800">MINTPAY</span>
+                Pay in Installments — Low Interest
+              </div>
+            </div>
+            <div class="payment-detail">
+              <div class="installment-info">
+                <strong>Choose from 3, 6, or 12 month installments.</strong><br>
+                Available for all major banks. Check your eligibility instantly.
+                <div class="installment-plans">
+                  <div class="installment-plan active" data-months="3">3 months</div>
+                  <div class="installment-plan" data-months="6">6 months</div>
+                  <div class="installment-plan" data-months="12">12 months</div>
+                </div>
+                <div style="margin-top:12px">
+                  <div class="form-group"><label>Mobile Number</label><input type="tel" placeholder="+94 7X XXX XXXX" style="margin-top:6px;border:1px solid var(--border);border-radius:4px;padding:10px 14px;font-size:13px;width:100%"></div>
+                </div>
+                <div style="font-size:11px;color:var(--text-light);margin-top:12px">Mintpay is available for ComBank, HNB, Sampath, BOC, NSB and other leading banks.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;display:flex;justify-content:space-between">
+          <button class="btn btn-outline back-step-btn"><i class="fas fa-arrow-left"></i> Back to Shipping</button>
+          <button class="btn btn-primary btn-lg next-step-btn"><i class="fas fa-arrow-right"></i> Review Order</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: REVIEW -->
+      <div class="checkout-section" data-step="3" style="display:none">
+        <h2><i class="fas fa-clipboard-check"></i> Review Your Order</h2>
+        <div style="background:var(--bg-light);border-radius:var(--radius-md);padding:20px;margin-bottom:20px">
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Shipping to</h4>
+          <p style="font-size:13px;color:var(--text-medium)">Your shipping address will appear here.</p>
+        </div>
+        <div style="background:var(--bg-light);border-radius:var(--radius-md);padding:20px">
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:1px">Order Items</h4>
+          <div id="review-items-list"></div>
+        </div>
+        <div style="margin-top:16px;padding:16px;background:rgba(39,174,96,0.08);border-radius:var(--radius-sm);border-left:4px solid var(--success)">
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:#1e8449">
+            <i class="fas fa-shield-alt"></i>
+            <span>Your order is protected by our secure payment gateway. Your financial data is never stored on our servers.</span>
+          </div>
+        </div>
+        <div style="margin-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
+          <button class="btn btn-outline back-step-btn"><i class="fas fa-arrow-left"></i> Back to Payment</button>
+          <button class="btn btn-accent btn-lg" id="place-order-btn"><i class="fas fa-lock"></i> Place Order Securely</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: CONFIRMATION -->
+      <div class="checkout-section" data-step="4" style="display:none">
+        <div class="order-confirmation">
+          <div class="check-icon"><i class="fas fa-check"></i></div>
+          <h2>Order Placed Successfully! 🎉</h2>
+          <p>Thank you for shopping with Luxe Threads!</p>
+          <p>A confirmation email has been sent to your email address.</p>
+          <div class="order-number">Order <span id="order-number">#LT00000000</span></div>
+          <p style="color:var(--text-light);font-size:13px;margin-bottom:32px">You can track your order status in your account dashboard.</p>
+          <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+            <a href="account.html" class="btn btn-outline btn-lg"><i class="fas fa-box"></i> Track My Order</a>
+            <a href="shop.html" class="btn btn-primary btn-lg"><i class="fas fa-store"></i> Continue Shopping</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ORDER SUMMARY (STICKY) -->
+    <div class="checkout-summary">
+      <h3>Order Summary</h3>
+      <div class="checkout-order-items" id="checkout-items">
+        <p style="color:var(--text-light);font-size:13px">Loading items...</p>
+      </div>
+      <div class="summary-row"><span>Subtotal</span><span id="co-subtotal">--</span></div>
+      <div class="summary-row" style="color:var(--success)"><span>Discount</span><span id="co-discount">--</span></div>
+      <div class="summary-row"><span>Shipping</span><span id="co-shipping">--</span></div>
+      <div class="summary-row total"><span>Total</span><span id="co-total">--</span></div>
+      <div style="margin-top:16px;font-size:12px;color:var(--text-light);display:flex;flex-direction:column;gap:6px">
+        <span><i class="fas fa-lock" style="color:var(--success);width:18px"></i> 256-bit SSL encrypted</span>
+        <span><i class="fas fa-shield-alt" style="color:var(--success);width:18px"></i> Buyer protection guaranteed</span>
+        <span><i class="fas fa-undo" style="color:var(--success);width:18px"></i> 14-day returns policy</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div style="text-align:center;padding:32px 0;border-top:1px solid rgba(255,255,255,0.1)">
+      <p style="color:rgba(255,255,255,0.4);font-size:12px">© 2026 Luxe Threads. All rights reserved. Secure payments by Visa, Mastercard, AMEX, KOKO & Mintpay.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/checkout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const items = Cart.get();
+  const reviewList = document.getElementById('review-items-list');
+  if (reviewList) {
+    reviewList.innerHTML = items.map(i => `
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+        <img src="${i.image}" style="width:48px;height:60px;object-fit:cover;border-radius:4px" onerror="this.src='https://placehold.co/48x60/e8e8e8/555?text=Item'">
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${i.name}</div><div style="font-size:11px;color:var(--text-light)">${i.size} / ${i.color} × ${i.qty}</div></div>
+        <div style="font-size:13px;font-weight:700">${formatPrice(i.price * i.qty)}</div>
+      </div>
+    `).join('');
+  }
+});
+</script>
+</body>
+</html>

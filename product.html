@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — Luxe Threads</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="page-loader"><div class="spinner"></div></div>
+<div class="toast-container"></div>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">LUXE <span>THREADS</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="shop.html?category=casual">Casual</a></li>
+      <li><a href="shop.html?category=office">Office Wear</a></li>
+      <li><a href="virtual-tryon.html">Virtual Try-On</a></li>
+    </ul>
+    <div class="nav-search"><i class="fas fa-search"></i><input type="text" placeholder="Search styles…"></div>
+    <div class="nav-actions">
+      <a href="account.html" class="nav-icon-btn nav-account-btn"><i class="fas fa-user"></i></a>
+      <a href="account.html#wishlist" class="nav-icon-btn"><i class="far fa-heart"></i><span class="badge wishlist-count" style="display:none">0</span></a>
+      <a href="cart.html" class="nav-icon-btn"><i class="fas fa-shopping-bag"></i><span class="badge cart-count" style="display:none">0</span></a>
+    </div>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="nav-mobile" id="mobile-nav">
+  <ul class="nav-mobile-links">
+    <li><a href="index.html">Home</a></li><li><a href="shop.html">Shop All</a></li>
+    <li><a href="virtual-tryon.html">Virtual Try-On</a></li><li><a href="cart.html">Cart</a></li>
+  </ul>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb bg-light" style="padding:12px 0">
+  <div class="container">
+    <ul class="flex" style="gap:8px;align-items:center;font-size:13px;color:var(--text-light)">
+      <li><a href="index.html">Home</a></li>
+      <li><i class="fas fa-chevron-right" style="font-size:10px"></i></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><i class="fas fa-chevron-right" style="font-size:10px"></i></li>
+      <li><a href="#" id="breadcrumb-category">Category</a></li>
+      <li><i class="fas fa-chevron-right" style="font-size:10px"></i></li>
+      <li style="color:var(--text-dark)" id="breadcrumb-product">Product</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="container">
+  <div class="product-layout">
+
+    <!-- GALLERY -->
+    <div class="product-gallery">
+      <div class="gallery-main">
+        <img id="gallery-main-img" src="https://placehold.co/600x800/e8e8e8/555?text=Loading..." alt="Product">
+        <div class="gallery-main-badge" id="gallery-badge"></div>
+      </div>
+      <div class="gallery-thumbs" id="gallery-thumbs"></div>
+    </div>
+
+    <!-- INFO -->
+    <div class="product-info">
+      <div class="product-category-tag" id="product-category"></div>
+      <h1 id="product-name">Loading...</h1>
+      <div class="product-rating-row">
+        <span id="product-rating-stars"></span>
+        <span class="rating-num" id="product-rating-num"></span>
+        <a href="#tab-reviews" id="product-review-link" onclick="document.querySelector('[data-tab=reviews]').click()"></a>
+      </div>
+      <div class="product-price-row">
+        <span class="price-current" id="product-price-current"></span>
+        <span class="price-original" id="product-price-original"></span>
+        <span class="badge badge-error price-discount" id="product-discount-badge"></span>
+      </div>
+      <p class="product-description" id="product-description"></p>
+
+      <!-- SIZE SELECTOR -->
+      <div style="margin-bottom:20px">
+        <div class="option-label">
+          <span>Select Size</span>
+          <a href="#tab-size-chart" onclick="document.querySelector('[data-tab=size-chart]').click()"><i class="fas fa-ruler"></i> Size Chart</a>
+        </div>
+        <div class="size-options" id="size-options"></div>
+      </div>
+
+      <!-- COLOR SELECTOR -->
+      <div style="margin-bottom:24px">
+        <div class="option-label">Color: <span id="selected-color-name" style="font-weight:400;color:var(--text-medium);margin-left:4px"></span></div>
+        <div class="color-options" id="color-options"></div>
+      </div>
+
+      <!-- QUANTITY -->
+      <div style="margin-bottom:24px">
+        <div class="option-label">Quantity</div>
+        <div class="qty-selector">
+          <button id="qty-dec"><i class="fas fa-minus"></i></button>
+          <input type="number" id="qty-input" value="1" min="1" max="10">
+          <button id="qty-inc"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="product-actions">
+        <button class="btn btn-primary btn-lg" id="add-to-cart-btn"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+        <button class="btn btn-accent btn-lg" id="buy-now-btn"><i class="fas fa-bolt"></i> Buy Now</button>
+        <button class="btn btn-outline" id="wishlist-btn"><i class="far fa-heart"></i> Wishlist</button>
+      </div>
+
+      <!-- VIRTUAL TRY-ON BUTTON -->
+      <a href="#" class="btn tryon-btn" id="tryon-btn">
+        <i class="fas fa-camera"></i> Try This On Virtually — Upload Your Photo
+      </a>
+
+      <!-- META -->
+      <div class="product-meta">
+        <span><i class="fas fa-tag"></i> Material: <strong id="product-material"></strong></span>
+        <span><i class="fas fa-tshirt"></i> Care: <strong id="product-care"></strong></span>
+        <span><i class="fas fa-shipping-fast"></i> Free delivery on orders over <strong>Rs. 5,000</strong></span>
+        <span><i class="fas fa-undo"></i> <strong>14-day hassle-free returns</strong></span>
+        <span><i class="fas fa-shield-alt"></i> <strong>100% Authentic</strong> — Verified by Luxe Threads</span>
+      </div>
+
+      <!-- SHARE -->
+      <div class="product-share">
+        <span>Share:</span>
+        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS: Description / Size Chart / Reviews -->
+  <div class="product-tabs" id="tab-reviews">
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="description">Description</button>
+      <button class="tab-btn" data-tab="size-chart">Size Chart</button>
+      <button class="tab-btn" data-tab="reviews">Reviews</button>
+    </div>
+
+    <!-- Description Tab -->
+    <div class="tab-content active" id="tab-description">
+      <div style="max-width:700px">
+        <p style="font-size:15px;color:var(--text-medium);line-height:1.8" id="tab-product-description"></p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+          <div style="background:var(--bg-light);padding:20px;border-radius:var(--radius-md)">
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Features</h4>
+            <ul style="font-size:13px;color:var(--text-medium);display:flex;flex-direction:column;gap:8px">
+              <li><i class="fas fa-check" style="color:var(--success);width:18px"></i> Premium quality fabric</li>
+              <li><i class="fas fa-check" style="color:var(--success);width:18px"></i> Comfortable all-day wear</li>
+              <li><i class="fas fa-check" style="color:var(--success);width:18px"></i> Available in multiple colors</li>
+              <li><i class="fas fa-check" style="color:var(--success);width:18px"></i> True to size fit</li>
+            </ul>
+          </div>
+          <div style="background:var(--bg-light);padding:20px;border-radius:var(--radius-md)">
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:12px;text-transform:uppercase;letter-spacing:1px">Care Instructions</h4>
+            <ul style="font-size:13px;color:var(--text-medium);display:flex;flex-direction:column;gap:8px">
+              <li><i class="fas fa-circle" style="color:var(--accent);font-size:6px;width:18px;vertical-align:middle"></i> Machine wash as indicated</li>
+              <li><i class="fas fa-circle" style="color:var(--accent);font-size:6px;width:18px;vertical-align:middle"></i> Do not bleach</li>
+              <li><i class="fas fa-circle" style="color:var(--accent);font-size:6px;width:18px;vertical-align:middle"></i> Iron on low heat</li>
+              <li><i class="fas fa-circle" style="color:var(--accent);font-size:6px;width:18px;vertical-align:middle"></i> Dry in shade</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Size Chart Tab -->
+    <div class="tab-content" id="tab-size-chart">
+      <div class="size-chart">
+        <div id="size-chart-table"></div>
+        <div style="margin-top:16px;padding:16px;background:rgba(201,168,76,0.08);border-radius:var(--radius-sm);border-left:4px solid var(--accent)">
+          <h4 style="font-size:13px;font-weight:700;margin-bottom:8px"><i class="fas fa-info-circle" style="color:var(--accent)"></i> How to Measure</h4>
+          <p style="font-size:12px;color:var(--text-medium)">Measure over your undergarments with a soft tape measure, keeping it comfortably loose. For chest: measure around the fullest part. For waist: measure around natural waistline. Highlighted row shows your suggested size.</p>
+        </div>
+        <div class="size-chart-tips">
+          <div class="size-tip">
+            <i class="fas fa-ruler-horizontal"></i>
+            <div><h4>Between Sizes?</h4><p>Always size up — our clothes are designed with a true-to-size fit for most body types.</p></div>
+          </div>
+          <div class="size-tip">
+            <i class="fas fa-camera"></i>
+            <div><h4>Not Sure?</h4><p>Use our Virtual Try-On feature to see how it looks on you before buying.</p></div>
+          </div>
+          <div class="size-tip">
+            <i class="fas fa-undo"></i>
+            <div><h4>Wrong Size?</h4><p>Free exchanges within 14 days. We make it easy to get the right fit.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Tab -->
+    <div class="tab-content" id="tab-reviews">
+      <div class="reviews-summary">
+        <div class="review-score">
+          <div class="big-rating" id="review-big-rating">4.7</div>
+          <div id="review-summary-stars"></div>
+          <p id="review-count-text"></p>
+        </div>
+        <div class="review-bars" id="review-bars"></div>
+      </div>
+      <div class="review-list" id="reviews-list"></div>
+
+      <!-- ADD REVIEW -->
+      <div class="add-review" id="add-review-section">
+        <h3>Write a Review</h3>
+        <div class="notice">
+          <i class="fas fa-info-circle"></i>
+          <span>Only customers who have purchased this product can submit reviews. All reviews are subject to admin approval before being published.</span>
+        </div>
+        <form id="review-form">
+          <div class="option-label" style="margin-bottom:8px">Your Rating</div>
+          <div class="star-rating-input">
+            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Review Title</label>
+            <input type="text" placeholder="Summarize your experience" required>
+          </div>
+          <div class="form-group" style="margin-bottom:16px">
+            <label>Your Review</label>
+            <textarea rows="5" id="review-text-input" placeholder="Tell others what you think about this product. Was it worth the price? How did it fit?" required></textarea>
+          </div>
+          <div class="form-group" style="margin-bottom:20px">
+            <label>Add Photos (optional)</label>
+            <input type="file" accept="image/*" multiple style="padding:8px;border:1px solid var(--border);border-radius:var(--radius-sm);width:100%">
+          </div>
+          <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit Review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED PRODUCTS -->
+  <section style="padding:60px 0">
+    <div class="section-header"><h2>You Might Also Like</h2></div>
+    <div class="products-grid" id="related-products"></div>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">LUXE <span>THREADS</span></div>
+        <p>Premium clothing for the modern lifestyle.</p>
+        <div class="footer-payments"><p>We accept:</p><div class="payment-icons"><span class="payment-icon">VISA</span><span class="payment-icon">MASTER</span><span class="payment-icon">AMEX</span><span class="payment-icon">KOKO</span><span class="payment-icon">MINTPAY</span><span class="payment-icon">COD</span></div></div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><ul><li><a href="shop.html">All Products</a></li><li><a href="shop.html?category=casual">Casual Wear</a></li><li><a href="shop.html?category=office">Office Wear</a></li></ul></div>
+      <div class="footer-col"><h4>Help</h4><ul><li><a href="#">Size Guide</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 Luxe Threads. All rights reserved.</p></div></div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/product.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tabDesc = document.getElementById('tab-product-description');
+  if (tabDesc && window.currentProduct) tabDesc.textContent = window.currentProduct?.description || '';
+  setTimeout(() => {
+    const p = window.currentProduct;
+    if (p && tabDesc) tabDesc.textContent = p.description;
+  }, 100);
+});
+</script>
+</body>
+</html>
